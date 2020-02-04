@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -21,6 +23,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    //Data binding enabled
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -35,4 +42,8 @@ dependencies {
 
     //Timber logging library dependency
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Android Navigation Controller library dependency
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0'
 }

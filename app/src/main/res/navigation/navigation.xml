@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/filter_fragment">
+
+    <fragment
+        android:id="@+id/filter_fragment"
+        android:name="com.idris.aminu.android.view.filterList.FilterListFragment"
+        android:label="Filter list fragment"
+        tools:layout="@layout/fragment_filter_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/car_owner_fragment"
+        android:name="com.idris.aminu.android.view.carOwnerList.CarOwnerFragment"
+        android:label="Car owner list"
+        tools:layout="@layout/fragment_car_owner_list">
+    </fragment>
+
+</navigation>
