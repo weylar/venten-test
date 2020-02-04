@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="filter"
+            type="com.idris.aminu.android.models.FilterElement" />
+
+        <variable
+            name="clickListener"
+            type="com.idris.aminu.android.view.filterList.FilterClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:onClick="@{() -> clickListener.onClick(filter)}">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Aloma"
+            android:textSize="45sp" />
+
+    </LinearLayout>
+
+</layout>
