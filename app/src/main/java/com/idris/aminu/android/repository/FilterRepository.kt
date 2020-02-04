@@ -14,7 +14,7 @@ class FilterRepository {
 
 
     fun getFilterList(): MutableLiveData<Filter>? {
-        val filter: MutableLiveData<Filter>? = MutableLiveData<Filter>()
+        val filter: MutableLiveData<Filter>? = MutableLiveData()
         val retrofit = Network.retrofit.create(FilterAPI::class.java)
         val call: Call<Filter> = retrofit.getFilterList()
         call.enqueue(object : Callback<Filter> {

@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.idris.aminu.android.databinding.FilterListViewBinding
+import com.idris.aminu.android.models.Filter
 import com.idris.aminu.android.models.FilterElement
 
 
@@ -30,8 +31,9 @@ class FilterListAdapter(private val clickListener: FilterClickListener) :
     ListAdapter<DataItem, RecyclerView.ViewHolder>(FilterDiffCallback()) {
 
 
-    fun submitListOnCall(list: FilterElement) {
-        submitList(listOf(DataItem.FilterElementItem(list)))
+    fun submitListOnCall(list: Filter) {
+
+        submitList(list.map { DataItem.FilterElementItem(it)})
 
     }
 

@@ -15,18 +15,61 @@
             type="com.idris.aminu.android.view.filterList.FilterClickListener" />
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/filter_height"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="@dimen/space_16"
+        android:layout_marginStart="@dimen/space_16"
+        android:layout_marginEnd="@dimen/space_16"
+        app:contentPadding="@dimen/tiny_space"
+        app:cardElevation="2dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center"
         android:onClick="@{() -> clickListener.onClick(filter)}">
 
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           tools:text="1990-2010"
+           android:textStyle="bold"
+           android:textColor="@color/black"
+           android:textAlignment="center"
+           android:textSize="24sp"
+           app:years="@{filter}"
+           android:layout_margin="@dimen/tiny_space" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Aloma"
-            android:textSize="45sp" />
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Female"
+            android:textSize="18sp"
+            android:layout_margin="@dimen/tiny_space"/>
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Country"
+            android:textSize="18sp"
+            app:countries="@{filter}"
+            android:layout_margin="@dimen/tiny_space"/>
+
+        <TextView
+            android:id="@+id/color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Color"
+            android:textSize="18sp"
+            app:colors="@{filter}"
+            android:layout_margin="@dimen/tiny_space"/>
 
     </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 </layout>

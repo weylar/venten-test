@@ -11,36 +11,35 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentFilterListBinding
+import com.idris.aminu.android.repository.FilterRepository
+import com.idris.aminu.android.viewModel.FilterListViewModelFactory
+import timber.log.Timber
 
 
 class FilterListFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    private val viewModelFactory = FilterListViewModelFactory(FilterRepository())
+    private val filterListViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(FilterListViewModel::class.java)
+    }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding: FragmentFilterListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_filter_list, container, false
         )
 
-        val filterListViewModel = ViewModelProvider(this).get(FilterListViewModel::class.java)
-        filterListViewModel.filterList
-
         binding.filterListViewModel = filterListViewModel
-
         binding.lifecycleOwner = this
 
-
-        val adapter = FilterListAdapter(FilterClickListener {
-            filterListViewModel.onFilterClicked(it)
-        })
+        val adapter = FilterListAdapter(FilterClickListener { filterListViewModel.onFilterClicked(it) })
         binding.filterRecycler.adapter = adapter
 
-        filterListViewModel.filterList.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitListOnCall(it)
+        filterListViewModel.filterList.observe(this, Observer { filterList ->
+            filterList?.let {
+                Timber.i("")
+                adapter.submitListOnCall(filterList)
+                binding.animationView.visibility = View.GONE
             }
         })
 

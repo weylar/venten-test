@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tiny_space">4dp</dimen>
+    <dimen name="filter_height">200dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+</resources>

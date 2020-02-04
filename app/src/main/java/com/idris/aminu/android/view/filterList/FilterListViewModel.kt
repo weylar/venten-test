@@ -18,6 +18,7 @@ package com.idris.aminu.android.view.filterList
 
 
 import androidx.lifecycle.*
+import com.idris.aminu.android.models.Filter
 import com.idris.aminu.android.models.FilterElement
 import com.idris.aminu.android.repository.FilterRepository
 
@@ -25,7 +26,7 @@ import com.idris.aminu.android.repository.FilterRepository
 class FilterListViewModel(private val repository: FilterRepository) : ViewModel() {
 
 
-    private var _filterList = MutableLiveData<FilterElement>()
+    private var _filterList = MutableLiveData<Filter>()
     val filterList
         get() = _filterList
 
@@ -39,7 +40,10 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
     }
 
     private fun initializeFetch() {
-        _filterList.let { repository.getFilterList() }
+        repository.getFilterList()?.let {
+            _filterList = it
+        }
+
     }
 
     fun onFilterClicked(id: Long) {
