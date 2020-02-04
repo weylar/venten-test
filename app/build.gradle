@@ -28,6 +28,13 @@ android {
         }
     }
 
+    android {
+        compileOptions {
+            targetCompatibility = "8"
+            sourceCompatibility = "8"
+        }
+    }
+
     //Data binding enabled
     dataBinding {
         enabled = true
