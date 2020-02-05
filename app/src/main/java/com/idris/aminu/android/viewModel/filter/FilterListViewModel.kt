@@ -17,13 +17,30 @@
 package com.idris.aminu.android.viewModel.filter
 
 
+import android.content.Context
+import android.os.Environment
 import androidx.lifecycle.*
+import com.downloader.OnDownloadListener
+import com.downloader.PRDownloader
+import com.downloader.PRDownloaderConfig
 import com.idris.aminu.android.models.Filter
 import com.idris.aminu.android.repository.FilterRepository
+import com.idris.aminu.android.util.Utility
+import com.idris.aminu.android.util.Utility.CAR_OWNER_DATA
+import timber.log.Timber
+import java.io.File
 
 
-class FilterListViewModel(private val repository: FilterRepository) : ViewModel() {
+class FilterListViewModel(private val repository: FilterRepository, private val context: Context) :
+    ViewModel() {
 
+
+    private val file by lazy {
+        File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            Utility.FOLDER
+        )
+    }
 
     private var _filterList = MutableLiveData<Filter>()
     val filterList
@@ -33,8 +50,13 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
     val navigateFilteredOwners
         get() = _navigateFilteredOwners
 
+    private val _startDialogDownload = MutableLiveData<Boolean>()
+    val startDialogDownload
+        get() = _startDialogDownload
+
 
     init {
+        checkDataExist()
         initializeFetch()
     }
 
@@ -45,8 +67,51 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
 
     }
 
+    private fun checkDataExist() {
+        if (!file.exists()) {
+            startDialogDownload.value = true
+        }else downloadConfigSetupAndStart()
+    }
+
+    private fun downloadConfigSetupAndStart() {
+        val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()
+        PRDownloader.initialize(context, config)
+        startDownload()
+    }
+
     fun onFilterClicked(id: Long) {
         _navigateFilteredOwners.value = id
+    }
+
+    private fun startDownload(): Int {
+
+        if (!file.exists()) file.mkdir()
+
+        return PRDownloader.download(
+            Utility.DOWNLOAD_URL,
+            file.absolutePath,
+            CAR_OWNER_DATA
+        )
+            .build()
+            .setOnStartOrResumeListener {
+                Timber.i("Started")
+            }
+            .setOnPauseListener {
+                Timber.i("Paused")
+            }
+            .setOnCancelListener {
+                Timber.i("Cancelled")
+            }
+            .setOnProgressListener { }
+            .start(object : OnDownloadListener {
+                override fun onDownloadComplete() {
+                    Timber.i("Successful")
+                }
+
+                override fun onError(error: com.downloader.Error?) {
+                    Timber.e(error?.serverErrorMessage)
+                }
+            })
     }
 
 
