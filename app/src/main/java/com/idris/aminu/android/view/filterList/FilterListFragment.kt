@@ -8,17 +8,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentFilterListBinding
 import com.idris.aminu.android.repository.FilterRepository
-import com.idris.aminu.android.viewModel.FilterListViewModelFactory
+import com.idris.aminu.android.viewModel.filter.FilterListViewModel
+import com.idris.aminu.android.viewModel.filter.FilterListViewModelFactory
 import timber.log.Timber
 
 
 class FilterListFragment : Fragment() {
 
-    private val viewModelFactory = FilterListViewModelFactory(FilterRepository())
+    private val viewModelFactory =
+        FilterListViewModelFactory(
+            FilterRepository()
+        )
     private val filterListViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(FilterListViewModel::class.java)
     }

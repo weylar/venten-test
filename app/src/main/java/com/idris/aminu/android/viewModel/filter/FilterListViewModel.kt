@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.idris.aminu.android.view.filterList
+package com.idris.aminu.android.viewModel.filter
 
 
 import androidx.lifecycle.*
 import com.idris.aminu.android.models.Filter
-import com.idris.aminu.android.models.FilterElement
 import com.idris.aminu.android.repository.FilterRepository
 
 

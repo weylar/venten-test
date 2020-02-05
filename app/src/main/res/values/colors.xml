@@ -3,5 +3,17 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorAccentTrans">#AED81B60</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="green">#4CAF50</color>
+    <color name="violet">#9C27B0</color>
+    <color name="yellow">#FFC107</color>
+    <color name="blue">#3F51B5</color>
+    <color name="teal">#008080</color>
+    <color name="maroon">#B03060</color>
+    <color name="red">#F0291A</color>
+    <color name="aquamarine">#7fffd4</color>
+    <color name="orange">#FF5722</color>
+    <color name="mauv">#B784A7</color>
 </resources>

@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.idris.aminu.android.databinding.FilterListViewBinding
 import com.idris.aminu.android.models.Filter
 import com.idris.aminu.android.models.FilterElement
+import timber.log.Timber
 
 
 class FilterListAdapter(private val clickListener: FilterClickListener) :

@@ -16,11 +16,19 @@
 
 package com.idris.aminu.android.view.filterList
 
-import android.widget.ImageView
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.ListView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.idris.aminu.android.models.Filter
+import com.idris.aminu.android.R
 import com.idris.aminu.android.models.FilterElement
+import timber.log.Timber
+
 
 //@BindingAdapter("sleepImage")
 //fun ImageView.setSleepImage(item: SleepNight?) {
@@ -40,20 +48,33 @@ import com.idris.aminu.android.models.FilterElement
 @BindingAdapter("years")
 fun TextView.setYearsDiff(item: FilterElement?) {
     item?.let {
-        text = "${item.startYear} - ${item.endYear}"
+        text = "${item.start_year} - ${item.end_year}"
     }
 }
 
 @BindingAdapter("gender")
 fun TextView.setGender(item: FilterElement?) {
     item?.let {
-        text = item.gender
+        val res = item.gender
+        text = when (res) {
+            "male" -> {
+                context.getString(R.string.male)
+            }
+            "female" -> {
+                context.getString(R.string.female)
+            }
+            else -> {
+                context.getString(R.string.all_gender)
+            }
+        }
     }
+
 }
 
 @BindingAdapter("countries")
 fun TextView.setCountries(item: FilterElement?) {
     item?.let {
+
         item.countries.map {
             append("$it ")
         }
@@ -62,9 +83,17 @@ fun TextView.setCountries(item: FilterElement?) {
 
 @BindingAdapter("colors")
 fun TextView.setColors(item: FilterElement?) {
-    item?.let {
-        item.colors.map {
-            append("$it ")
+    item?.let {element ->
+        if (element.colors.isEmpty()){
+            text = "All Colors"
+        }else{
+            element.colors.map {
+                append( " $it")
+
+            }
         }
+
+
+
     }
 }

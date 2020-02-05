@@ -17,12 +17,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/filter_height"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:layout_marginTop="@dimen/space_16"
         android:layout_marginStart="@dimen/space_16"
         android:layout_marginEnd="@dimen/space_16"
-        app:contentPadding="@dimen/tiny_space"
+        app:contentPadding="@dimen/space_16"
         app:cardElevation="2dp">
 
     <LinearLayout
@@ -48,7 +48,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Female"
+            android:background="@drawable/chip"
+            android:textColor="@color/white"
+            android:paddingStart="@dimen/space_16"
+            android:paddingEnd="@dimen/space_16"
+            android:padding="@dimen/dimen_4dp"
             android:textSize="18sp"
+            app:gender="@{filter}"
+            android:textAlignment="center"
             android:layout_margin="@dimen/tiny_space"/>
 
         <TextView
@@ -56,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Country"
+            android:gravity="center"
             android:textSize="18sp"
             app:countries="@{filter}"
             android:layout_margin="@dimen/tiny_space"/>
@@ -64,8 +72,8 @@
             android:id="@+id/color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Color"
-            android:textSize="18sp"
+            android:orientation="horizontal"
+            android:gravity="center"
             app:colors="@{filter}"
             android:layout_margin="@dimen/tiny_space"/>
 

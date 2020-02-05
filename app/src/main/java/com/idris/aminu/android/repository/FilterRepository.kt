@@ -1,6 +1,6 @@
 package com.idris.aminu.android.repository
 
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
 import com.idris.aminu.android.data.FilterAPI
 import com.idris.aminu.android.models.Filter
