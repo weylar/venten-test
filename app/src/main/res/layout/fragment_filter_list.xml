@@ -40,6 +40,7 @@
                        android:hint="@string/search_filter"
                        android:autofillHints="@string/search_filter"
                        android:background="@drawable/edittext_bg"
+                       android:focusableInTouchMode="true"
                        android:padding="@dimen/dimen_4dp"
                        android:textColorHint="@color/colorAccent"
                        android:inputType="textFilter"

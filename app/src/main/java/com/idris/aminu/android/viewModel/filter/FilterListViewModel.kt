@@ -1,22 +1,7 @@
-/*
- * Copyright 2018, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.idris.aminu.android.viewModel.filter
 
 
+import android.app.Application
 import android.content.Context
 import android.os.Environment
 import androidx.lifecycle.*
@@ -31,14 +16,20 @@ import timber.log.Timber
 import java.io.File
 
 
-class FilterListViewModel(private val repository: FilterRepository, private val context: Context) :
-    ViewModel() {
+class FilterListViewModel(private val repository: FilterRepository) : ViewModel() {
 
 
     private val file by lazy {
         File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
             Utility.FOLDER
+        )
+    }
+
+    private val absoluteFile by lazy {
+        File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            Utility.FOLDER.plus("/$CAR_OWNER_DATA")
         )
     }
 
@@ -54,39 +45,44 @@ class FilterListViewModel(private val repository: FilterRepository, private val 
     val startDialogDownload
         get() = _startDialogDownload
 
+    private val _completeDownload = MutableLiveData<Boolean>()
+    val completeDownload
+        get() = _completeDownload
+
+     val grantAccess = MutableLiveData<Boolean>()
+
+
 
     init {
-        checkDataExist()
         initializeFetch()
     }
 
     private fun initializeFetch() {
+        Timber.i("Supposed called")
         repository.getFilterList()?.let {
             _filterList = it
+
         }
 
     }
 
-    private fun checkDataExist() {
-        if (!file.exists()) {
-            startDialogDownload.value = true
-        }else downloadConfigSetupAndStart()
+    fun checkDataExist() {
+        if (!absoluteFile.exists()) {
+            _startDialogDownload.value = false
+            startDownload()
+        }
+
+
     }
 
-    private fun downloadConfigSetupAndStart() {
-        val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()
-        PRDownloader.initialize(context, config)
-        startDownload()
-    }
 
     fun onFilterClicked(id: Long) {
         _navigateFilteredOwners.value = id
     }
 
+
     private fun startDownload(): Int {
-
         if (!file.exists()) file.mkdir()
-
         return PRDownloader.download(
             Utility.DOWNLOAD_URL,
             file.absolutePath,
@@ -105,11 +101,13 @@ class FilterListViewModel(private val repository: FilterRepository, private val 
             .setOnProgressListener { }
             .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
-                    Timber.i("Successful")
+                    _completeDownload.value = true
+                    grantAccess.value = true
                 }
 
                 override fun onError(error: com.downloader.Error?) {
                     Timber.e(error?.serverErrorMessage)
+                    _completeDownload.value = true
                 }
             })
     }
