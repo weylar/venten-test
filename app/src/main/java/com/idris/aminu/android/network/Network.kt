@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 
 object Network {
 
-     val retrofit = Retrofit.Builder()
+     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(Utility.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

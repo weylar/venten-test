@@ -1,19 +1,3 @@
-/*
- * Copyright 2018, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.idris.aminu.android.view.filterList
 
 import android.os.Bundle
@@ -22,21 +6,58 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentFilterListBinding
+import com.idris.aminu.android.repository.FilterRepository
+import com.idris.aminu.android.viewModel.filter.FilterListViewModel
+import com.idris.aminu.android.viewModel.filter.FilterListViewModelFactory
+import timber.log.Timber
 
 
 class FilterListFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    private val viewModelFactory =
+        FilterListViewModelFactory(
+            FilterRepository()
+        )
+    private val filterListViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(FilterListViewModel::class.java)
+    }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding: FragmentFilterListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_filter_list, container, false
         )
+
+        binding.filterListViewModel = filterListViewModel
+        binding.lifecycleOwner = this
+
+        val adapter = FilterListAdapter(FilterClickListener { filterListViewModel.onFilterClicked(it) })
+        binding.filterRecycler.adapter = adapter
+
+        filterListViewModel.filterList.observe(this, Observer { filterList ->
+            filterList?.let {
+                Timber.i("")
+                adapter.submitListOnCall(filterList)
+                binding.animationView.visibility = View.GONE
+            }
+        })
+
+        filterListViewModel.navigateFilteredOwners.observe(viewLifecycleOwner, Observer { id ->
+            id?.let {
+//                this.findNavController().navigate(
+//                    SleepTrackerFragmentDirections
+//                        .actionSleepTrackerFragmentToSleepDetailFragment(id))
+              //  sleepTrackerViewModel.onSleepDataQualityNavigated()
+            }
+        })
+
+
+
+
 
         return binding.root
     }
