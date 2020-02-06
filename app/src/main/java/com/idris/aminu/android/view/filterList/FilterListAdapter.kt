@@ -85,8 +85,8 @@ class FilterDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     }
 }
 
-class FilterClickListener(val clickListener: (filterId: Long) -> Unit) {
-    fun onClick(filter: FilterElement) = clickListener(filter.id)
+class FilterClickListener(val clickListener: (filter: FilterElement) -> Unit) {
+    fun onClick(filter: FilterElement) = clickListener(filter)
 }
 
 sealed class DataItem {

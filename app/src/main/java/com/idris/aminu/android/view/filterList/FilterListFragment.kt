@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.downloader.PRDownloader
 import com.downloader.PRDownloaderConfig
 import com.idris.aminu.android.R
@@ -51,8 +52,10 @@ class FilterListFragment : Fragment() {
         binding.filterListViewModel = filterListViewModel
         binding.lifecycleOwner = this
 
-        val adapter =
-            FilterListAdapter(FilterClickListener { filterListViewModel.onFilterClicked(it) })
+        val adapter = FilterListAdapter(FilterClickListener {
+            val action = FilterListFragmentDirections.actionFilterFragmentToCarOwnerFragment(it)
+            this.findNavController().navigate(action)
+        })
         binding.filterRecycler.adapter = adapter
 
         filterListViewModel.filterList.observe(this, Observer { filterList ->
@@ -67,14 +70,6 @@ class FilterListFragment : Fragment() {
             }
         })
 
-        filterListViewModel.navigateFilteredOwners.observe(viewLifecycleOwner, Observer { id ->
-            id?.let {
-                //                this.findNavController().navigate(
-//                    SleepTrackerFragmentDirections
-//                        .actionSleepTrackerFragmentToSleepDetailFragment(id))
-                //  sleepTrackerViewModel.onSleepDataQualityNavigated()
-            }
-        })
 
         checkPermissionAndStart()
         val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()

@@ -20,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -50,6 +51,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
     //Timber logging library dependency
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -74,4 +76,10 @@ dependencies {
 
     //Download manager dependency
     implementation 'com.mindorks.android:prdownloader:0.6.0'
+
+    //CSV parser library
+    implementation 'com.opencsv:opencsv:4.6'
+
+
+
 }
