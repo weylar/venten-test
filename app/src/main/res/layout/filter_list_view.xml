@@ -52,23 +52,36 @@
             android:textColor="@color/white"
             android:paddingStart="@dimen/space_16"
             android:paddingEnd="@dimen/space_16"
-            android:padding="@dimen/dimen_4dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:gender="@{filter}"
             android:textAlignment="center"
             android:layout_margin="@dimen/tiny_space"/>
 
-        <TextView
-            android:id="@+id/country"
+        <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Country"
-            android:gravity="center"
-            android:textSize="18sp"
-            app:countries="@{filter}"
-            android:layout_margin="@dimen/tiny_space"/>
+            android:scrollbars="none">
 
-        <TextView
+            <LinearLayout
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Country"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textSize="18sp"
+                app:countries="@{filter}"
+                android:layout_margin="@dimen/tiny_space">
+
+
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+        <LinearLayout
             android:id="@+id/color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -5,4 +5,5 @@
     <string name="male">Male</string>
     <string name="all_gender">All Gender</string>
     <string name="female">Female</string>
+    <string name="wait_message">Please wait while we download all required data…</string>
 </resources>

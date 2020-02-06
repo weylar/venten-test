@@ -7,4 +7,8 @@
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
     <dimen name="dimen_64dp">64dp</dimen>
+    <dimen name="dimen_32">32dp</dimen>
+    <dimen name="anim_height">180dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
 </resources>
