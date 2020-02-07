@@ -26,10 +26,7 @@ import timber.log.Timber
 class CarOwnerFragment : Fragment() {
 
 
-    private val viewModelFactory = FilterListViewModelFactory(FilterRepository())
-    private val filterListViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(FilterListViewModel::class.java)
-    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,13 +64,11 @@ class CarOwnerFragment : Fragment() {
         })
 
         //View to show if db is available or not. If not redownload
-        carOwnerViewModel.isDbAvalable.observe(this, Observer{
+        carOwnerViewModel.isDbAvailable.observe(this, Observer{
             if(!it){
                 binding.animationView.visibility = View.GONE
                 binding.animationViewEmpty.visibility = View.VISIBLE
-                binding.animationViewEmptyText.setOnClickListener {
-                    filterListViewModel.checkDataExist()
-                }
+
             }
         })
 

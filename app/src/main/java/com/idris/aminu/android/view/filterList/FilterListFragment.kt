@@ -75,9 +75,9 @@ class FilterListFragment : Fragment() {
         checkPermissionAndStart()
         val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()
         PRDownloader.initialize(context, config)
-        loadingFrag = DialogProgress(context!!)
         filterListViewModel.startDialogDownload.observe(this, Observer {
             if (!it) {
+                loadingFrag = DialogProgress(context!!)
                 loadingFrag.showDialog()
             }
         })
