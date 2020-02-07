@@ -16,8 +16,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.downloader.PRDownloader
 import com.downloader.PRDownloaderConfig
+import com.google.android.material.snackbar.Snackbar
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentFilterListBinding
 import com.idris.aminu.android.repository.FilterRepository
@@ -51,8 +53,10 @@ class FilterListFragment : Fragment() {
         binding.filterListViewModel = filterListViewModel
         binding.lifecycleOwner = this
 
-        val adapter =
-            FilterListAdapter(FilterClickListener { filterListViewModel.onFilterClicked(it) })
+        val adapter = FilterListAdapter(FilterClickListener {
+            val action = FilterListFragmentDirections.actionFilterFragmentToCarOwnerFragment(it)
+            this.findNavController().navigate(action)
+        })
         binding.filterRecycler.adapter = adapter
 
         filterListViewModel.filterList.observe(this, Observer { filterList ->
@@ -67,21 +71,13 @@ class FilterListFragment : Fragment() {
             }
         })
 
-        filterListViewModel.navigateFilteredOwners.observe(viewLifecycleOwner, Observer { id ->
-            id?.let {
-                //                this.findNavController().navigate(
-//                    SleepTrackerFragmentDirections
-//                        .actionSleepTrackerFragmentToSleepDetailFragment(id))
-                //  sleepTrackerViewModel.onSleepDataQualityNavigated()
-            }
-        })
 
         checkPermissionAndStart()
         val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()
         PRDownloader.initialize(context, config)
-        loadingFrag = DialogProgress(context!!)
         filterListViewModel.startDialogDownload.observe(this, Observer {
             if (!it) {
+                loadingFrag = DialogProgress(context!!)
                 loadingFrag.showDialog()
             }
         })

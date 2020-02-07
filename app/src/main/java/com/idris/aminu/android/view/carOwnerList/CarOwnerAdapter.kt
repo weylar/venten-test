@@ -1,5 +1,5 @@
 
-package com.idris.aminu.android.view.filterList
+package com.idris.aminu.android.view.carOwnerList
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.idris.aminu.android.databinding.FilterListViewBinding
-import com.idris.aminu.android.models.Filter
-import com.idris.aminu.android.models.FilterElement
+import com.idris.aminu.android.databinding.CarOwnerListViewBinding
+import com.idris.aminu.android.databinding.FragmentCarOwnerListBinding
+import com.idris.aminu.android.models.CarOwner
+import com.idris.aminu.android.models.CarOwnerList
 
 
-class FilterListAdapter(private val clickListener: FilterClickListener) :
-    ListAdapter<DataItem, RecyclerView.ViewHolder>(FilterDiffCallback()) {
+class CarOwnerAdapter : ListAdapter<DataItem, RecyclerView.ViewHolder>(CarOwnerDiffCallback()) {
 
 
-    fun submitListOnCall(list: Filter) {
+    fun submitListOnCall(list: CarOwnerList) {
 
-        submitList(list.map { DataItem.FilterElementItem(it) })
+        submitList(list.map { DataItem.CarOwnerItem(it)})
 
     }
 
@@ -26,8 +26,8 @@ class FilterListAdapter(private val clickListener: FilterClickListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ViewHolder -> {
-                val filterItem = getItem(position) as DataItem.FilterElementItem
-                holder.bind(clickListener, filterItem.filter)
+                val ownerItems = getItem(position) as DataItem.CarOwnerItem
+                holder.bind(ownerItems.filter)
             }
         }
 
@@ -38,19 +38,18 @@ class FilterListAdapter(private val clickListener: FilterClickListener) :
     }
 
 
-    class ViewHolder private constructor(private val binding: FilterListViewBinding) :
+    class ViewHolder private constructor(private val binding: CarOwnerListViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(clickListener: FilterClickListener, item: FilterElement) {
-            binding.filter = item
-            binding.clickListener = clickListener
+        fun bind( item: CarOwner) {
+            binding.carOwner = item
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = FilterListViewBinding.inflate(layoutInflater, parent, false)
+                val binding = CarOwnerListViewBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
@@ -58,7 +57,7 @@ class FilterListAdapter(private val clickListener: FilterClickListener) :
 }
 
 
-class FilterDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+class CarOwnerDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem.id == newItem.id
     }
@@ -69,13 +68,10 @@ class FilterDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     }
 }
 
-class FilterClickListener(val clickListener: (filter: FilterElement) -> Unit) {
-    fun onClick(filter: FilterElement) = clickListener(filter)
-}
 
 sealed class DataItem {
 
-    data class FilterElementItem(val filter: FilterElement) : DataItem() {
+    data class CarOwnerItem(val filter: CarOwner) : DataItem() {
         override val id = filter.id
     }
 

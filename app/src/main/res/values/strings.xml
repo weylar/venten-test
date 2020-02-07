@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">Idris Aminu</string>
     <string name="filter">Filter</string>
-    <string name="search_filter">Search filter...</string>
+    <string name="search_filter">Search filter…</string>
     <string name="male">Male</string>
-    <string name="all_gender">All Gender</string>
+    <string name="all_gender">Male | Female </string>
     <string name="female">Female</string>
     <string name="wait_message">Please wait while we download all required data…</string>
+    <string name="go_back">Go back</string>
+    <string name="results">Result</string>
+    <string name="car_image">Car image</string>
+    <string name="brand">Brand</string>
+    <string name="year">Year</string>
+    <string name="color">Color</string>
+    <string name="gender">Gender</string>
+    <string name="country">Country</string>
+    <string name="job">Job</string>
+    <string name="email">Email: </string>
+    <string name="bio">Bio: </string>
+    <string name="no_matched_records">No matched records!</string>
+    <string name="searching">Searching…</string>
+    <string name="database_not_found">Database not found! </string>
 </resources>

@@ -10,6 +10,14 @@ enum class Color (var color: String) {
     RED("Red"),
     AQUAMARINE("Aquamarine"),
     ORANGE("Orange"),
-    MAUV("Mauv")
+    MAUV("Mauv"),
+    PUCE("Puce"),
+    INDIGO("Indigo"),
+    TURQUOISE("Turquoise"),
+    GOLDENROD("Goldenrod"),
+    PINK("Pink"),
+    FUSCIA("Fuscia"),
+    CRIMSON("Crimson"),
+    KHAKI("Khaki"),
 
 }

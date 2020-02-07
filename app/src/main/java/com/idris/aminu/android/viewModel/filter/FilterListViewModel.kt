@@ -9,6 +9,7 @@ import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.downloader.PRDownloaderConfig
 import com.idris.aminu.android.models.Filter
+import com.idris.aminu.android.models.FilterElement
 import com.idris.aminu.android.repository.FilterRepository
 import com.idris.aminu.android.util.Utility
 import com.idris.aminu.android.util.Utility.CAR_OWNER_DATA
@@ -34,19 +35,16 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
     }
 
     private var _filterList = MutableLiveData<Filter>()
-    val filterList
+    val filterList: LiveData<Filter>
         get() = _filterList
 
-    private val _navigateFilteredOwners = MutableLiveData<Long>()
-    val navigateFilteredOwners
-        get() = _navigateFilteredOwners
 
     private val _startDialogDownload = MutableLiveData<Boolean>()
-    val startDialogDownload
+    val startDialogDownload: LiveData<Boolean>
         get() = _startDialogDownload
 
     private val _completeDownload = MutableLiveData<Boolean>()
-    val completeDownload
+    val completeDownload: LiveData<Boolean>
         get() = _completeDownload
 
      val grantAccess = MutableLiveData<Boolean>()
@@ -75,10 +73,6 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
 
     }
 
-
-    fun onFilterClicked(id: Long) {
-        _navigateFilteredOwners.value = id
-    }
 
 
     private fun startDownload(): Int {

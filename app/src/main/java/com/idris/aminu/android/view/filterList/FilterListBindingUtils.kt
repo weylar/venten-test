@@ -97,10 +97,14 @@ fun LinearLayout.setColors(item: FilterElement?) {
 
     item?.let { element ->
         if (element.colors.isEmpty()) {
-            val childLayout = buildChildLayout()
-            val view = buildTextView("All colors")
-            childLayout.addView(view)
-            addView(childLayout)
+            val colors = listOf("Green", "Violet", "Yellow","Blue","Teal","Maroon","Red","Aquamarine",
+                "Orange", "Mauv","Puce", "Indigo", "Turquoise", "Goldenrod","Pink", "Fuscia", "Crimson", "Khaki")
+            colors.map { color ->
+                val childLayout = buildChildLayout()
+                val view = buildAllColor(color)
+                childLayout.addView(view)
+                addView(childLayout)
+            }
         } else {
             element.colors.map { color ->
                 val childLayout = buildChildLayout()
@@ -134,7 +138,52 @@ private fun LinearLayout.buildColor(color: String): TextView {
             )
             Color.ORANGE.color -> ContextCompat.getColor(context, R.color.orange)
             Color.MAUV.color -> ContextCompat.getColor(context, R.color.mauv)
-            else -> ContextCompat.getColor(context, R.color.white)
+            Color.PUCE.color -> ContextCompat.getColor(context, R.color.puce)
+            Color.INDIGO.color -> ContextCompat.getColor(context, R.color.indigo)
+            Color.TURQUOISE.color -> ContextCompat.getColor(context, R.color.turquoise)
+            Color.GOLDENROD.color -> ContextCompat.getColor(context, R.color.goldenrod)
+            Color.FUSCIA.color -> ContextCompat.getColor(context, R.color.fushcia)
+            Color.PINK.color -> ContextCompat.getColor(context, R.color.pink)
+            Color.CRIMSON.color -> ContextCompat.getColor(context, R.color.crimson)
+            Color.KHAKI.color -> ContextCompat.getColor(context, R.color.khaki)
+            else -> ContextCompat.getColor(context, R.color.black)
+        }, PorterDuff.Mode.SRC_IN
+    )
+
+    view.background = drawable
+    return view
+}
+
+private fun LinearLayout.buildAllColor(color: String): TextView {
+    val view = TextView(this.context)
+    val layoutParams = LinearLayout.LayoutParams(64, 64)
+    layoutParams.setMargins(8)
+    view.layoutParams = layoutParams
+    val drawable = ContextCompat.getDrawable(context, R.drawable.color_bg)
+    drawable?.mutate()?.setColorFilter(
+        when (color) {
+            Color.RED.color -> ContextCompat.getColor(context, R.color.red)
+            Color.GREEN.color -> ContextCompat.getColor(context, R.color.green)
+            Color.VIOLET.color -> ContextCompat.getColor(context, R.color.violet)
+            Color.YELLOW.color -> ContextCompat.getColor(context, R.color.yellow)
+            Color.BLUE.color -> ContextCompat.getColor(context, R.color.blue)
+            Color.TEAL.color -> ContextCompat.getColor(context, R.color.teal)
+            Color.MAROON.color -> ContextCompat.getColor(context, R.color.maroon)
+            Color.AQUAMARINE.color -> ContextCompat.getColor(
+                context,
+                R.color.aquamarine
+            )
+            Color.ORANGE.color -> ContextCompat.getColor(context, R.color.orange)
+            Color.MAUV.color -> ContextCompat.getColor(context, R.color.mauv)
+            Color.PUCE.color -> ContextCompat.getColor(context, R.color.puce)
+            Color.INDIGO.color -> ContextCompat.getColor(context, R.color.indigo)
+            Color.TURQUOISE.color -> ContextCompat.getColor(context, R.color.turquoise)
+            Color.GOLDENROD.color -> ContextCompat.getColor(context, R.color.goldenrod)
+            Color.FUSCIA.color -> ContextCompat.getColor(context, R.color.fushcia)
+            Color.PINK.color -> ContextCompat.getColor(context, R.color.pink)
+            Color.CRIMSON.color -> ContextCompat.getColor(context, R.color.crimson)
+            Color.KHAKI.color -> ContextCompat.getColor(context, R.color.khaki)
+            else -> ContextCompat.getColor(context, R.color.black)
         }, PorterDuff.Mode.SRC_IN
     )
 

@@ -20,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -47,9 +48,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //Test libraries
+    testImplementation 'junit:junit:4.12',
+            "com.google.truth:truth:1.0.1",
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.0-M1"
 
     //Timber logging library dependency
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -74,4 +80,10 @@ dependencies {
 
     //Download manager dependency
     implementation 'com.mindorks.android:prdownloader:0.6.0'
+
+    //CSV parser library
+    implementation 'de.siegmar:fastcsv:1.0.3'
+
+
+
 }

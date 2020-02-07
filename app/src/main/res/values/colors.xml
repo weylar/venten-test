@@ -16,4 +16,12 @@
     <color name="aquamarine">#7fffd4</color>
     <color name="orange">#FF5722</color>
     <color name="mauv">#B784A7</color>
+    <color name="puce">#CC8899</color>
+    <color name="indigo">#4b0082</color>
+    <color name="turquoise"> #40e0d0</color>
+    <color name="goldenrod">#daa520 </color>
+    <color name="pink">#ffc0cb</color>
+    <color name="fushcia"> #FF00FF</color>
+    <color name="crimson"> #990000</color>
+    <color name="khaki">#f0e68c</color>
 </resources>
