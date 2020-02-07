@@ -18,18 +18,15 @@ package com.idris.aminu.android.view.filterList
 
 import android.graphics.PorterDuff
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.setMargins
-import androidx.core.view.setPadding
 import androidx.databinding.BindingAdapter
 import com.idris.aminu.android.R
 import com.idris.aminu.android.models.FilterElement
 import com.idris.aminu.android.util.Color
-import timber.log.Timber
 
 
 //@BindingAdapter("sleepImage")
@@ -97,8 +94,26 @@ fun LinearLayout.setColors(item: FilterElement?) {
 
     item?.let { element ->
         if (element.colors.isEmpty()) {
-            val colors = listOf("Green", "Violet", "Yellow","Blue","Teal","Maroon","Red","Aquamarine",
-                "Orange", "Mauv","Puce", "Indigo", "Turquoise", "Goldenrod","Pink", "Fuscia", "Crimson", "Khaki")
+            val colors = listOf(
+                "Green",
+                "Violet",
+                "Yellow",
+                "Blue",
+                "Teal",
+                "Maroon",
+                "Red",
+                "Aquamarine",
+                "Orange",
+                "Mauv",
+                "Puce",
+                "Indigo",
+                "Turquoise",
+                "Goldenrod",
+                "Pink",
+                "Fuscia",
+                "Crimson",
+                "Khaki"
+            )
             colors.map { color ->
                 val childLayout = buildChildLayout()
                 val view = buildAllColor(color)
@@ -211,7 +226,7 @@ private fun LinearLayout.buildTextView(country: String): TextView {
     )
     view.text = country
     view.setTextColor(ContextCompat.getColor(context, R.color.black))
-    view.setPadding(32, 16,32, 16)
+    view.setPadding(32, 16, 32, 16)
     layoutParams.setMargins(8)
     view.layoutParams = layoutParams
     val drawable = ContextCompat.getDrawable(context, R.drawable.country_bg)

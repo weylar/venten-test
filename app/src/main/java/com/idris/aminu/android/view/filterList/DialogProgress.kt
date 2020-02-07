@@ -14,13 +14,13 @@ class DialogProgress(activity: Context?) {
     private val dialog = Dialog(activity!!)
     fun showDialog() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
         dialog.setContentView(R.layout.loading_view)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
-    fun dismiss(){
+    fun dismiss() {
         dialog.dismiss()
     }
 }

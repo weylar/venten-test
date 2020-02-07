@@ -1,4 +1,3 @@
-
 package com.idris.aminu.android.view.filterList
 
 import android.annotation.SuppressLint

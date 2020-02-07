@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1058445757529",
+    "firebase_url": "https://venten-e1b4f.firebaseio.com",
+    "project_id": "venten-e1b4f",
+    "storage_bucket": "venten-e1b4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058445757529:android:4f1921119ec4bb87d43548",
+        "android_client_info": {
+          "package_name": "com.idris.aminu.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058445757529-5vvjjidjc26bs27f85ufk8qvmciven65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idris.aminu.android",
+            "certificate_hash": "84add01474ea39748a89db089c683276467ce567"
+          }
+        },
+        {
+          "client_id": "1058445757529-8ippelgcf71gv0equfg4utj4dsdtkb1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAi9NeLZdippXFI6Vbv09OJf3_wYysB9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058445757529-8ippelgcf71gv0equfg4utj4dsdtkb1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

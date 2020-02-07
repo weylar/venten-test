@@ -1,8 +1,6 @@
 package com.idris.aminu.android.models
 
 
-
-
 typealias CarOwnerList = ArrayList<CarOwner>
 
 data class CarOwner(

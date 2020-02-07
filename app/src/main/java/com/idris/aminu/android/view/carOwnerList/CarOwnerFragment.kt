@@ -12,19 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentCarOwnerListBinding
-import com.idris.aminu.android.models.FilterElement
-import com.idris.aminu.android.repository.FilterRepository
-import com.idris.aminu.android.view.filterList.FilterClickListener
-import com.idris.aminu.android.view.filterList.FilterListAdapter
-import com.idris.aminu.android.viewModel.filter.FilterListViewModel
-import com.idris.aminu.android.viewModel.filter.FilterListViewModelFactory
 import com.idris.aminu.android.viewModel.owner.CarOwnerViewModel
 import com.idris.aminu.android.viewModel.owner.CarOwnerViewModelFactory
-import timber.log.Timber
 
 
 class CarOwnerFragment : Fragment() {
-
 
 
     override fun onCreateView(
@@ -49,12 +41,12 @@ class CarOwnerFragment : Fragment() {
         binding.carownerRecycler.adapter = adapter
 
         //Pretty animation to display while searching through file
-        carOwnerViewModel.filterResult.observe(this, Observer {filteredResult ->
+        carOwnerViewModel.filterResult.observe(this, Observer { filteredResult ->
             adapter.submitListOnCall(filteredResult)
             binding.animationView.visibility = View.GONE
-            if (filteredResult.size < 1){
+            if (filteredResult.size < 1) {
                 binding.noRecordMatch.visibility = View.VISIBLE
-            }else {
+            } else {
                 Snackbar.make(
                     binding.close,
                     "${filteredResult.size} total records fetched!",
@@ -63,9 +55,9 @@ class CarOwnerFragment : Fragment() {
             }
         })
 
-        //View to show if db is available or not. If not redownload
-        carOwnerViewModel.isDbAvailable.observe(this, Observer{
-            if(!it){
+        //View to show if db is available or not. If not re-download
+        carOwnerViewModel.isDbAvailable.observe(this, Observer {
+            if (!it) {
                 binding.animationView.visibility = View.GONE
                 binding.animationViewEmpty.visibility = View.VISIBLE
 

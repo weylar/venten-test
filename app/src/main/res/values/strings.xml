@@ -18,6 +18,5 @@
     <string name="email">Email: </string>
     <string name="bio">Bio: </string>
     <string name="no_matched_records">No matched records!</string>
-    <string name="searching">Searching…</string>
     <string name="database_not_found">Database not found! </string>
 </resources>

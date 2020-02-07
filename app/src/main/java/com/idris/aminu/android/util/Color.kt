@@ -1,6 +1,6 @@
 package com.idris.aminu.android.util
 
-enum class Color (var color: String) {
+enum class Color(var color: String) {
     GREEN("Green"),
     VIOLET("Violet"),
     YELLOW("Yellow"),
