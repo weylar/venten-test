@@ -29,7 +29,6 @@ class FilterManager {
 
     /*Performing a IO operations will take time,
        so it's safe to take it out of  the UI thread*/
-
     suspend fun readFile(absoluteFile: File): CarOwnerList {
 
         val result = CarOwnerList()

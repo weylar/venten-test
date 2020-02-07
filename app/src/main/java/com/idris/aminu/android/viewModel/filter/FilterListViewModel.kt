@@ -1,15 +1,13 @@
 package com.idris.aminu.android.viewModel.filter
 
 
-import android.app.Application
-import android.content.Context
 import android.os.Environment
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
-import com.downloader.PRDownloaderConfig
 import com.idris.aminu.android.models.Filter
-import com.idris.aminu.android.models.FilterElement
 import com.idris.aminu.android.repository.FilterRepository
 import com.idris.aminu.android.util.Utility
 import com.idris.aminu.android.util.Utility.CAR_OWNER_DATA
@@ -47,8 +45,8 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
     val completeDownload: LiveData<Boolean>
         get() = _completeDownload
 
-     val grantAccess = MutableLiveData<Boolean>()
 
+    val grantAccess = MutableLiveData<Boolean>()
 
 
     init {
@@ -74,7 +72,6 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
     }
 
 
-
     private fun startDownload(): Int {
         if (!file.exists()) file.mkdir()
         return PRDownloader.download(
@@ -97,18 +94,16 @@ class FilterListViewModel(private val repository: FilterRepository) : ViewModel(
                 override fun onDownloadComplete() {
                     _completeDownload.value = true
                     grantAccess.value = true
+                    Timber.i("Completed")
                 }
 
                 override fun onError(error: com.downloader.Error?) {
                     Timber.e(error?.serverErrorMessage)
                     _completeDownload.value = true
+
                 }
             })
     }
 
 
-    override fun onCleared() {
-        super.onCleared()
-
-    }
 }

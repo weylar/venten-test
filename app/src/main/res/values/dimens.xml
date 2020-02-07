@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="tiny_space">4dp</dimen>
-    <dimen name="filter_height">200dp</dimen>
     <dimen name="space_16">16dp</dimen>
     <dimen name="toolbar_height">50dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
     <dimen name="dimen_64dp">64dp</dimen>
     <dimen name="dimen_32">32dp</dimen>
-    <dimen name="anim_height">180dp</dimen>
-    <dimen name="dimen_24">24dp</dimen>
     <dimen name="dimen_12">12dp</dimen>
 </resources>

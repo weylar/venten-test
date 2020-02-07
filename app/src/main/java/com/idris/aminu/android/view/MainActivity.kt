@@ -1,7 +1,7 @@
 package com.idris.aminu.android.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.idris.aminu.android.R
 
 class MainActivity : AppCompatActivity() {

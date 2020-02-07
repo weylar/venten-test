@@ -1,24 +1,14 @@
 package com.idris.aminu.android.view.carOwnerList
 
 import android.graphics.PorterDuff
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.setMargins
-import androidx.core.view.setPadding
 import androidx.databinding.BindingAdapter
 import com.idris.aminu.android.R
 import com.idris.aminu.android.models.CarOwner
-import com.idris.aminu.android.models.FilterElement
 import com.idris.aminu.android.util.Color
-import timber.log.Timber
-import kotlin.math.nextTowards
-import kotlin.math.nextUp
 
 
 @BindingAdapter("image")
@@ -53,7 +43,7 @@ fun TextView.setYear(item: CarOwner?) {
 
 @BindingAdapter("color")
 fun View.setColor(item: CarOwner?) {
-    item?.let {car ->
+    item?.let { car ->
         val drawable = ContextCompat.getDrawable(context, R.drawable.color_bg)
         drawable?.mutate()?.setColorFilter(
             when (car.carColor) {
@@ -82,7 +72,7 @@ fun View.setColor(item: CarOwner?) {
             }, PorterDuff.Mode.SRC_IN
         )
 
-       background = drawable
+        background = drawable
     }
 }
 
@@ -118,7 +108,7 @@ fun TextView.setBio(item: CarOwner?) {
 fun TextView.setGender(item: CarOwner?) {
     item?.let {
         text = it.gender
-        }
+    }
 
 
 }

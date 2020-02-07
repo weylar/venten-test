@@ -1,7 +1,6 @@
 package com.idris.aminu.android
 
 import android.app.Application
-import android.os.Bundle
 import timber.log.Timber
 
 

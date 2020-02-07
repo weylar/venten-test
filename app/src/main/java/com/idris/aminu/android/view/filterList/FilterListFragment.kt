@@ -2,15 +2,13 @@ package com.idris.aminu.android.view.filterList
 
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,10 +20,10 @@ import com.downloader.PRDownloaderConfig
 import com.google.android.material.snackbar.Snackbar
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentFilterListBinding
+import com.idris.aminu.android.network.Network.isNetworkAvailable
 import com.idris.aminu.android.repository.FilterRepository
 import com.idris.aminu.android.viewModel.filter.FilterListViewModel
 import com.idris.aminu.android.viewModel.filter.FilterListViewModelFactory
-import timber.log.Timber
 
 
 private const val MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 1
@@ -49,6 +47,9 @@ class FilterListFragment : Fragment() {
             inflater, R.layout.fragment_filter_list, container, false
         )
 
+        checkPermissionAndStart()
+        val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()
+        PRDownloader.initialize(context, config)
 
         binding.filterListViewModel = filterListViewModel
         binding.lifecycleOwner = this
@@ -62,7 +63,7 @@ class FilterListFragment : Fragment() {
         filterListViewModel.filterList.observe(this, Observer { filterList ->
             filterList?.let {
                 filterListViewModel.grantAccess.observe(this, Observer {
-                    if (it){
+                    if (it) {
                         adapter.submitListOnCall(filterList)
                         binding.animationView.visibility = View.GONE
                     }
@@ -71,20 +72,34 @@ class FilterListFragment : Fragment() {
             }
         })
 
-
-        checkPermissionAndStart()
-        val config = PRDownloaderConfig.newBuilder().setDatabaseEnabled(true).build()
-        PRDownloader.initialize(context, config)
         filterListViewModel.startDialogDownload.observe(this, Observer {
             if (!it) {
-                loadingFrag = DialogProgress(context!!)
+                loadingFrag = DialogProgress(context)
                 loadingFrag.showDialog()
+
+            }
+        })
+        filterListViewModel.completeDownload.observe(this, Observer { isCompleted ->
+            isCompleted?.let { result ->
+                if (result) {
+                    loadingFrag.dismiss()
+                }
             }
         })
 
-        filterListViewModel.completeDownload.observe(this, Observer {
-            if (it) loadingFrag.dismiss()
-        })
+
+        //Check if network is available
+        if (!isNetworkAvailable(context!!)!!) {
+            val snack =
+                Snackbar.make(binding.toolbar, "No internet connection", Snackbar.LENGTH_INDEFINITE)
+            snack.setAction("Ok!") {
+                snack.dismiss()
+            }
+            snack.show()
+            Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
+        }
+
+
 
 
 
@@ -92,9 +107,12 @@ class FilterListFragment : Fragment() {
         return binding.root
     }
 
+
     private fun checkPermissionAndStart() {
-        if (ContextCompat.checkSelfPermission(context!!,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
             != PackageManager.PERMISSION_GRANTED
         ) {
             promptDialogPermission()

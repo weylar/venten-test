@@ -1,4 +1,3 @@
-
 package com.idris.aminu.android.view.carOwnerList
 
 import android.annotation.SuppressLint
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.idris.aminu.android.databinding.CarOwnerListViewBinding
-import com.idris.aminu.android.databinding.FragmentCarOwnerListBinding
 import com.idris.aminu.android.models.CarOwner
 import com.idris.aminu.android.models.CarOwnerList
 
@@ -18,7 +16,7 @@ class CarOwnerAdapter : ListAdapter<DataItem, RecyclerView.ViewHolder>(CarOwnerD
 
     fun submitListOnCall(list: CarOwnerList) {
 
-        submitList(list.map { DataItem.CarOwnerItem(it)})
+        submitList(list.map { DataItem.CarOwnerItem(it) })
 
     }
 
@@ -41,7 +39,7 @@ class CarOwnerAdapter : ListAdapter<DataItem, RecyclerView.ViewHolder>(CarOwnerD
     class ViewHolder private constructor(private val binding: CarOwnerListViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind( item: CarOwner) {
+        fun bind(item: CarOwner) {
             binding.carOwner = item
             binding.executePendingBindings()
         }
