@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/filter_fragment">
+
+    <fragment
+        android:id="@+id/filter_fragment"
+        android:name="com.idris.aminu.android.view.filterList.FilterListFragment"
+        android:label="Filter list fragment"
+        tools:layout="@layout/fragment_filter_list">
+        <action
+            android:id="@+id/action_filter_fragment_to_car_owner_fragment"
+            app:destination="@id/car_owner_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+<!--        <argument-->
+<!--            android:name="car"-->
+<!--            app:argType="com.idris.aminu.android.models.FilterElement" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/car_owner_fragment"
+        android:name="com.idris.aminu.android.view.carOwnerList.CarOwnerFragment"
+        android:label="Car owner list"
+        tools:layout="@layout/fragment_car_owner_list">
+        <argument
+            android:name="car"
+            app:argType="com.idris.aminu.android.models.FilterElement" />
+
+    </fragment>
+
+</navigation>
