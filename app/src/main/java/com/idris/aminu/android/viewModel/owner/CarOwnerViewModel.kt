@@ -37,13 +37,22 @@ class CarOwnerViewModel(private val data: FilterElement) : ViewModel() {
     private var _filterResult = MutableLiveData<CarOwnerList>()
     val filterResult: LiveData<CarOwnerList>
             get() = _filterResult
+    
+    private var _isDbAvailable = MutableLiveData<Boolean>()
+    val isDbAvalable: LiveData<Boolean>
+            get() = _isDbAvailable
 
 
 
     init {
-        val filterManager = FilterManager(absoluteFile)
-        uiScope.launch {
-           _filterResult.value = filterManager.filter(data)
+        if (!absoluteFile.exists()){
+            _isDbAvailable.value = false
+        }else {
+            val filterManager = FilterManager(absoluteFile)
+            uiScope.launch {
+                _filterResult.value = filterManager.filter(data)
+            }
+            _isDbAvailable.value = true
         }
 
 

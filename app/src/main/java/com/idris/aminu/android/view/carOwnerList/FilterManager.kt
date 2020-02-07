@@ -36,7 +36,6 @@ class FilterManager(private val absoluteFile: File) {
         val result = CarOwnerList()
         withContext(Dispatchers.IO) {
             try {
-
                 val csvReader = CsvReader()
                 csvReader.setFieldSeparator(',')
                 csvReader.setSkipEmptyRows(true)
@@ -45,6 +44,7 @@ class FilterManager(private val absoluteFile: File) {
                     .use { csvParser ->
                         while (true) {
                             val row = csvParser.nextRow() ?: break
+                            //Filter through the values by the respective criteria
                             if (row.getField(YEAR).toLong() in criteria.start_year..criteria.end_year) {
                                 if ((criteria.gender.capitalize() == row.getField(GENDER).toString().capitalize())
                                     or (criteria.gender.isEmpty())
