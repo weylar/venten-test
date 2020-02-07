@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentCarOwnerListBinding
 import com.idris.aminu.android.models.FilterElement
@@ -48,6 +49,7 @@ class CarOwnerFragment : Fragment() {
         carOwnerViewModel.filterResult.observe(this, Observer {filteredResult ->
             adapter.submitListOnCall(filteredResult)
             binding.animationView.visibility = View.GONE
+            Snackbar.make(binding.close, "${filteredResult.size} total records fetched!", Snackbar.LENGTH_LONG).show()
         })
 
         binding.close.setOnClickListener { findNavController().navigateUp() }

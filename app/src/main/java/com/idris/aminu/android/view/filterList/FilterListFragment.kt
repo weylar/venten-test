@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.downloader.PRDownloader
 import com.downloader.PRDownloaderConfig
+import com.google.android.material.snackbar.Snackbar
 import com.idris.aminu.android.R
 import com.idris.aminu.android.databinding.FragmentFilterListBinding
 import com.idris.aminu.android.repository.FilterRepository

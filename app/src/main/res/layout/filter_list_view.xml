@@ -48,7 +48,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Female"
-            android:background="@drawable/country_bg"
             android:textColor="@color/black"
             android:paddingStart="@dimen/space_16"
             android:paddingEnd="@dimen/space_16"
@@ -80,7 +79,10 @@
 
         </HorizontalScrollView>
 
-
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
         <LinearLayout
             android:id="@+id/color"
             android:layout_width="wrap_content"
@@ -89,6 +91,8 @@
             android:gravity="center"
             app:colors="@{filter}"
             android:layout_margin="@dimen/tiny_space"/>
+
+        </HorizontalScrollView>
 
     </LinearLayout>
 

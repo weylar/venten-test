@@ -78,7 +78,7 @@ dependencies {
     implementation 'com.mindorks.android:prdownloader:0.6.0'
 
     //CSV parser library
-    implementation 'com.opencsv:opencsv:4.6'
+    implementation 'de.siegmar:fastcsv:1.0.3'
 
 
 

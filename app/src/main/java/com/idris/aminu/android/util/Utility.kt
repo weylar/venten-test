@@ -10,7 +10,7 @@ object Utility {
     const val CAR_OWNER_DATA = "car_owner_data.csv"
 
     object CSVHeader {
-        const val ID = 0
+        const val ID: Int = 0
         const val FIRST_NAME = 1
         const val LAST_NAME = 2
         const val EMAIL = 3
